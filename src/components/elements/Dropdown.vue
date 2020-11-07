@@ -4,7 +4,7 @@
       <input class="dropdown__input" :placeholder="this.textInput" @click="showDropdown()">
       <img class="dropdown__show-more" src="../../assets/expand_more.png" @click="showDropdown()">
     </div>
-    <div class="dropdown__body">
+    <div class="dropdown__body" v-if="this.show">
       <ul class="dropdown__elements">
         <li class="dropdown__element" v-for="line in this.lines">
           <h3>{{ line.text }}</h3>
