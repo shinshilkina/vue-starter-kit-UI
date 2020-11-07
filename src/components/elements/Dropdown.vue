@@ -4,19 +4,19 @@
       <input class="dropdown__input" :placeholder="this.textInput" @click="showDropdown()">
       <img class="dropdown__show-more" src="../../assets/expand_more.png" @click="showDropdown()">
     </div>
-    <div class="dropdown__body" v-if="show">
+    <div class="dropdown__body">
       <ul class="dropdown__elements">
         <li class="dropdown__element" v-for="line in this.lines">
           <h3>{{ line.text }}</h3>
           <div class="dropdown__element__buttons">
-            <button class="dropdown__button-minus" @click="changeCountMinus( line)">-</button>
+            <button class="dropdown__button-minus" :class="line.count === 0 ? 'disable' : null" @click="changeCountMinus(line)">-</button>
             <h3>{{ line.count }}</h3>
-            <button class="dropdown__button-plus" @click="changeCountPlus( line)">+</button>
+            <button class="dropdown__button-plus" @click="changeCountPlus(line)">+</button>
           </div>
         </li>
       </ul>
       <div class="dropdown__buttons">
-        <h3 class="dropdown__clear" @click="clear">очистить</h3>
+        <h3 class="dropdown__clear" v-if="this.lines.find(line => line.count > 0)" @click="clear">очистить</h3>
         <h3 class="dropdown__apply" @click="apply(dropdownType)">применить</h3>
       </div>
     </div>
@@ -120,14 +120,14 @@ name: "Dropdown.vue",
 
     border-radius: 50%;
     background-color: #FFFF;
-    border: 1px solid $darkShade25;
+    border: 1px solid $darkShade50;
     cursor: pointer;
   }
   &__buttons {
     display: flex;
-    justify-content: space-between;
   }
   &__apply {
+    margin-left: auto;
     color: $purple;
   }
   &__clear {
@@ -135,6 +135,9 @@ name: "Dropdown.vue",
   }
   &__apply, &__clear, &__show-more, &__input {
     cursor: pointer;
+  }
+  .disable {
+    border-color: $darkShade25;
   }
 }
 </style>
