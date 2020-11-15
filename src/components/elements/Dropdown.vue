@@ -1,6 +1,7 @@
 <template>
   <div class="dropdown">
     <div class="dropdown__header">
+      <h3 v-if="dropdownType === 'guests'">гости</h3>
       <input class="dropdown__input" :placeholder="this.textInput" @click="showDropdown()">
       <img class="dropdown__show-more" src="../../assets/expand_more.png" @click="showDropdown()">
     </div>
@@ -26,15 +27,17 @@
 <script>
 export default {
 name: "Dropdown.vue",
+  props: {
+    show : Boolean,
+    textInput: String,
+    dropdownType: String,
+    lines: Array
+  },
   data() {
-    let show = false;
-    let textInput = 'Сколько гостей';
-    let dropdownType = 'guests';
-    let lines = [
-      { text: 'взрослые', count: 0},
-      { text: 'дети', count: 0},
-      { text: 'младенцы', count: 0}
-    ];
+    let show = this.props.show;
+    let textInput = this.props.textInput;
+    let dropdownType = this.props.dropdownType;
+    let lines = this.props.lines;
       return {
       show, lines, textInput, dropdownType
     }
@@ -85,6 +88,7 @@ name: "Dropdown.vue",
   }
   &__input {
     width: 320px;
+    margin-top: -5px;
   }
   &__show-more {
     position: absolute;

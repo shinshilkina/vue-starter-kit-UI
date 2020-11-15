@@ -8,8 +8,8 @@
       <router-link to=item.href>{{ item.title }}</router-link>
     </div>
     <div class="header__buttons" v-if="authorization.name === null || authorization.lastName === null">
-      <div><h3 class="header__button-login">login</h3></div>
-      <h3 class="header__button-register">register</h3>
+      <div><h3 class="header__button-login button-login">login</h3></div>
+      <h3 class="header__button-register button-register">register</h3>
     </div>
     <span class="header__profile" v-if="authorization.name !== null || authorization.lastName !== null">
       {{ authorization.name }} {{authorization.lastName }}
@@ -64,21 +64,7 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
-  &__button-login, &__button-register {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    border-radius: 2vh;
-  }
-  &__button-login {
-    height: 3vh;
-    position: relative;
-    padding: 0 1.2vw;
-    background-color: #FFFFFF;
-    color: $purple;
-    border: 2px solid #8BA4F9;
-  }
   &__button-register {
     height: 3.2vh;
     padding: 0 1.4vw;

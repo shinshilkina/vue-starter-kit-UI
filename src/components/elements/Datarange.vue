@@ -1,22 +1,33 @@
 <template>
-  <div class="search-form__dates">
-    <div class="search-form__date-arrive dropdown__date">
+  <div class="datarange">
+    <div class="dropdown__date">
       <div class="dropdown__date__title">прибытие</div>
-      <input class="dropdown__date__input" placeholder="ДД.ММ.ГГГГ">
+      <input class="dropdown__date__input arrived" placeholder="ДД.ММ.ГГГГ">
       <img class="dropdown__date__expand" src="../../assets/expand_more.png">
     </div>
-    <div class="search-form__date-depart dropdown__date">
+    <div class="dropdown__date">
       <div class="dropdown__date__title">выезд</div>
-      <input  class="dropdown__date__input" placeholder="ДД.ММ.ГГГГ">
+      <input  class="dropdown__date__input departure" placeholder="ДД.ММ.ГГГГ">
       <img class="dropdown__date__expand" src="../../assets/expand_more.png">
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "Datarange.vue",
-  components: { }
+  components: {
+
+  },
+  data() {
+    return {
+
+    };
+  },
+  methods: {
+
+  }
 }
 </script>
 
@@ -38,20 +49,6 @@ export default {
   }
   &__input {
     width: 150px;
-    height: 44px;
-    padding: 0 0 5px 13px;
-
-    background: #FFFFFF;
-
-    border: 1px solid $darkShade25;
-    box-sizing: border-box;
-    border-radius: 4px;
-
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 129%;
-
-    color: $darkShade75;
   }
   &__expand {
     position: absolute;
