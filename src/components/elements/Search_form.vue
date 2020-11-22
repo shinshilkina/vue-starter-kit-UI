@@ -6,7 +6,7 @@
       dropdownType = 'guests'
               :lines = "[{ text: 'взрослые', count: 0}, { text: 'дети', count: 0},
               { text: 'младенцы', count: 0} ]"/>
-    <FormsButton button-text="подобрать номер"/>
+    <FormsButton textButton="подобрать номер"/>
   </div>
 </template>
 
@@ -24,8 +24,8 @@ export default {
 @import "../style";
 
 .search-form {
-  width: 319px;
-  height: 329px;
+  width: 380px;
+  height: 374px;
 
   padding: 22px 29px;
   .datarange {
