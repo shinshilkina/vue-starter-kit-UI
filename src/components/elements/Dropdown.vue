@@ -2,12 +2,12 @@
   <div class="dropdown">
     <div class="dropdown__header">
       <h3 v-if="dropdownType === 'guests'">гости</h3>
-      <input class="dropdown__input" :placeholder="this.textInput" @click="showDropdown()">
+      <input class="dropdown__input" :placeholder="this.textInputLocal" @click="showDropdown()" readonly>
       <img class="dropdown__show-more" src="../../assets/expand_more.png" @click="showDropdown()">
     </div>
-    <div class="dropdown__body" v-if="this.show">
+    <div class="dropdown__body" v-if="this.showLocal">
       <ul class="dropdown__elements">
-        <li class="dropdown__element" v-for="line in this.lines">
+        <li class="dropdown__element" v-for="line in this.linesLocal">
           <h3>{{ line.text }}</h3>
           <div class="dropdown__element__buttons">
             <button class="dropdown__button-minus" :class="line.count === 0 ? 'disable' : null" @click="changeCountMinus(line)">-</button>
@@ -17,8 +17,8 @@
         </li>
       </ul>
       <div class="dropdown__buttons">
-        <h3 class="dropdown__clear" v-if="this.lines.find(line => line.count > 0)" @click="clear">очистить</h3>
-        <h3 class="dropdown__apply" @click="apply(dropdownType)">применить</h3>
+        <h3 class="dropdown__clear" v-if="this.linesLocal.find(line => line.count > 0)" @click="clear">очистить</h3>
+        <h3 class="dropdown__apply" @click="apply(dropdownTypeLocal)">применить</h3>
       </div>
     </div>
   </div>
@@ -29,22 +29,22 @@ export default {
 name: "Dropdown.vue",
   props: {
     show : Boolean,
-    textInput: String,
-    dropdownType: String,
-    lines: Array
+    textInput: {type: String, default: "Сколько гостей"},
+    dropdownType: {type: String, default: "guests"},
+    lines: {type: Array, default: [{ text: 'взрослые', count: 0}, { text: 'дети', count: 0},
+        { text: 'младенцы', count: 0} ]}
   },
   data() {
-    let show = this.props.show;
-    let textInput = this.props.textInput;
-    let dropdownType = this.props.dropdownType;
-    let lines = this.props.lines;
-      return {
-      show, lines, textInput, dropdownType
+    return {
+      showLocal: this.show,
+      textInputLocal: this.textInput,
+      dropdownTypeLocal: this.dropdownType,
+      linesLocal: this.lines
     }
   },
   methods: {
     showDropdown() {
-      this.show === false ? this.show = true : this.show = false;
+      this.showLocal === false ? this.showLocal = true : this.showLocal = false;
     },
     changeCountMinus(line) {
       line.count > 0 ? line.count-- : null;
@@ -55,26 +55,26 @@ name: "Dropdown.vue",
     apply(dropdownType) {
       if (dropdownType === 'guests') {
         let countGuests = 0;
-        this.lines.map(line => {
+        this.linesLocal.map(line => {
           countGuests += line.count;
           return countGuests;
         });
         countGuests !== 0 ?
           countGuests === 1 ?
-            this.textInput = countGuests + ' гость' :
+            this.textInputLocal = countGuests + ' гость' :
             countGuests > 1 && countGuests < 5 ?
-              this.textInput = countGuests + ' гостя' :
-              this.textInput = countGuests + ' гостей' :
-          this.textInput = 'Сколько гостей';
+              this.textInputLocal = countGuests + ' гостя' :
+              this.textInputLocal = countGuests + ' гостей' :
+          this.textInputLocal = 'Сколько гостей';
       }
-      this.show = false;
+      this.showLocal = false;
     },
     clear() {
-      this.lines.map(line => {
+      this.linesLocal.map(line => {
         line.count = 0;
       })
-      this.textInput = 'Сколько гостей';
-      this.show = false;
+      this.textInputLocal = 'Сколько гостей';
+      this.showLocal = false;
     }
   }
 }
@@ -99,6 +99,10 @@ name: "Dropdown.vue",
     background-image: url("../../assets/expand_more.png");
   }
   &__body {
+    position: absolute;
+    width: 299px;
+    z-index: 1;
+
     background-color: #FFFF;
     border: 1px solid $darkShade25;
     border-top: transparent;

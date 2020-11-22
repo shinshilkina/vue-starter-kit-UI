@@ -2,12 +2,12 @@
   <div class="datarange">
     <div class="dropdown__date">
       <div class="dropdown__date__title">прибытие</div>
-      <input class="dropdown__date__input arrived" placeholder="ДД.ММ.ГГГГ" ref="arrived">
+      <input class="dropdown__date__input arrived" placeholder="ДД.ММ.ГГГГ" ref="arrived" readonly>
       <img class="dropdown__date__expand" src="../../assets/expand_more.png">
     </div>
     <div class="dropdown__date">
       <div class="dropdown__date__title">выезд</div>
-      <input  class="dropdown__date__input departure" placeholder="ДД.ММ.ГГГГ" ref="departure">
+      <input  class="dropdown__date__input departure" placeholder="ДД.ММ.ГГГГ" ref="departure" readonly>
       <img class="dropdown__date__expand" src="../../assets/expand_more.png">
     </div>
   </div>
@@ -17,13 +17,11 @@
 import Lightpick from 'lightpick';
 export default {
   name: "Datarange.vue",
-  components: {
-
-  },
   data() {
+    let countOfDays = 0;
     let picker;
     return {
-      picker
+      picker, countOfDays
     };
   },
   mounted() {
@@ -32,6 +30,7 @@ export default {
       secondField: this.$refs.departure,
       singleDate: false,
       lang: 'ru',
+      format: 'DD.MM.YYYY',
       locale: {
         buttons: {
           reset: 'очистить',
@@ -50,6 +49,10 @@ export default {
 
           return '';
         }
+      },
+      onSelect: function(start, end) {
+        (start && end) ? this.countOfDays =  Math.round((end - start)/(1000*60*60*24)) + 1: null;
+        console.log(typeof this.countDays);
       },
       footer: true
     });
