@@ -4,17 +4,17 @@
     <input class="login__email" placeholder="Email" >
     <input class="login__password" placeholder="Пароль">
     <FormsButton textButton="войти" />
-    <Exist_account_button left-text="Нет аккаунта на Toxin?"
+    <ExistAccountButton left-text="Нет аккаунта на Toxin?"
                           button-text="Создать" form-class="login__register-area" />
   </div>
 </template>
 
 <script>
-import FormsButton from "./FormsButton";
-import Exist_account_button from "./Exist_account_button";
+import FormsButton from "../elements/FormsButton";
+import ExistAccountButton from "../elements/ExistAccountButton";
 export default {
-name: "Login_form.vue",
-  components: {FormsButton, Exist_account_button}
+name: "LoginForm.vue",
+  components: {FormsButton, ExistAccountButton}
 }
 </script>
 

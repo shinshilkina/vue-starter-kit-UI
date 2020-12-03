@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import Datarange from "./Datarange";
-import Dropdown from "./Dropdown";
-import FormsButton from "./FormsButton";
+import Datarange from "../elements/Datarange";
+import Dropdown from "../elements/Dropdown";
+import FormsButton from "../elements/FormsButton";
 export default {
   name: "Search_form",
   components: {Dropdown, Datarange, FormsButton}

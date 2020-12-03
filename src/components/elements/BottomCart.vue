@@ -18,7 +18,7 @@
 <script>
 import dataText from "../../assets/data.json";
 export default {
-  name: "Bottom_cart.vue",
+  name: "BottomCart.vue",
   props: ['docs'],
   data() {
     return {
