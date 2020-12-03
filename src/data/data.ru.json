@@ -1,0 +1,71 @@
+{
+  "header": {
+    "items": [
+      { "key": "aboutUs", "title": "О нас", "href": "#aboutus"},
+      { "key": "services", "title": "Услуги", "href": "#services"},
+      { "key": "careers", "title": "Вакансии", "href": "#careers"},
+      { "key": "news", "title": "Новости", "href": "#news"},
+      { "key": "documentation", "title": "Соглашения", "href": "#documentation"}
+    ],
+    "buttons": [
+      {"key": "login", "title": "войти"},
+      {"key": "register","title": "зарегистрироваться"}
+    ]
+  },
+  "bottom": [
+    { "id": "title",
+      "elements":
+      [{"element": "Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»"}]
+    },
+    { "id": "navigation",
+      "title": "Навигация",
+      "elements": [
+        {"element": "О нас"},
+        {"element": "Новости"},
+        {"element": "Служба поддержки"},
+        {"element": "Услуги"}
+      ]
+    },
+    {
+      "id": "about_us",
+      "title": "о нас",
+      "elements" :[
+        {"element": "О сервисе"},
+        {"element": "Наша команда"},
+        {"element": "Вакансии"},
+        {"element": "Инвесторы"}
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Инвесторы",
+      "elements": [
+        {"element": "Соглашения"},
+        {"element": "Сообщества"},
+        {"element": "Связь с нами"}
+      ]
+    },
+    {
+      "id":"subscribe",
+      "title": "Подписка",
+      "elements": [
+        {"element": "Получайте специальные предложения и новости сервиса"}
+      ]
+    }
+  ],
+  "forms": {
+  "search": {
+    "title": "Найдём номера под ваши пожелания",
+    "arrival": "прибытие",
+    "departure": "выезд",
+    "button": "подобрать номер"
+  }
+},
+  "elements": {
+    "dropdown": {
+      "title": "гости",
+      "placeholder": "сколько гостей"
+    }
+  }
+
+}

@@ -2,22 +2,22 @@
   <table class="check-table">
     <tbody>
       <tr>
-        <td class="check-table__sum-text row-text" colspan="2">
-          <span>{{ this.cost }}{{ this.currency }} x {{this.countDays}} суток</span>
+        <td class="check-table__sum-text row-text" colspan="2" ref="countDays">
+          <span>{{ this.$props.cost }}{{ this.$props.currency }} x {{this.$props.days}} суток</span>
         </td>
         <td class="check-table__row-sum-result row-result">
-          <span>{{ this.costNumber }}{{ this.currency }}</span>
+          <span>{{ this.costNumber }}{{ this.$props.currency }}</span>
         </td>
       </tr>
       <tr>
         <td class="check-table__discount-text row-text">
-          <span>Сбор за услуги: скидка {{ this.discount }}{{ this.currency }}</span>
+          <span>Сбор за услуги: скидка {{ this.$props.discount }}{{ this.$props.currency }}</span>
         </td>
         <td class="check-table__discount-icon row-icon">
           <span class="row-icon__body">i</span>
         </td>
         <td class="check-table__row-discount-result row-result">
-          <span>0{{ this.currency }}</span>
+          <span>0{{ this.$props.currency }}</span>
         </td>
       </tr>
       <tr>
@@ -28,7 +28,7 @@
           <span class="row-icon__body">i</span>
         </td>
         <td class="check-table__row-compl-serv-result row-result">
-          <span>{{ this.complServ }}{{ this.currency }}</span>
+          <span>{{ this.$props.complServ }}{{ this.$props.currency }}</span>
         </td>
       </tr>
       <tr class="total">
@@ -36,7 +36,7 @@
           <span>Итого</span>
         </td>
         <td class="check-table__total-result total-result">
-          <span>{{ this.resultCost }}{{ this.currency }}</span>
+          <span>{{ this.resultCost }}{{ this.$props.currency }}</span>
         </td>
       </tr>
     </tbody>
@@ -45,26 +45,28 @@
 
 <script>
 export default {
-name: "Check_table.vue",
+name: "CheckTable.vue",
   props: {
     cost: {type: Number, default: 9990},
-    countDays: {type: Number, default: 4},
     discount: {type: Number, default: 2179},
     complServ: {type: Number, default: 300},
-    currency: {type: String, default: '₽'}
+    currency: {type: String, default: '₽'},
+    days: {type: Number, default: 0}
   },
   data() {
-  let costNumber = 39960;
-  let resultCost = 38081;
-    return {
-      costLocal: this.cost,
-      countDaysLocal: this.countDays,
-      discountLocal: this.discount,
-      complServLocal: this.complServ,
-      currencyLocal: this.currency,
-      costNumber,
-      resultCost
-    }
+    let costNumber;
+    let resultCost;
+      return {
+        costNumber,
+        resultCost
+      }
+  },
+  computed: {
+
+  },
+  mounted() {
+    this.costNumber = this.$props.cost * this.$props.days;
+    this.resultCost = this.costNumber - (this.discount + this.complServ);
   }
 }
 </script>

@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-name: "Exist_account_button.vue",
+name: "ExistAccountButton.vue",
   props: {
     leftText: {type: String, default: "Уже есть аккаунт на Toxin"},
     buttonText: {type: String, default: "Создать"},

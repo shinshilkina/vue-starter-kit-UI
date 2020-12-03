@@ -24,17 +24,17 @@
       <label class="toggle-round__label-text">Получать спецпредложения</label>
     </div>
     <FormsButton textButton="перейти к оплате" />
-    <Exist_account_button />
+    <ExistAccountButton />
   </form>
 </template>
 
 <script>
-import FormsButton from "./FormsButton";
-import Exist_account_button from "./Exist_account_button";
+import FormsButton from "../elements/FormsButton";
+import ExistAccountButton from "../elements/ExistAccountButton";
 import MaskedInput from "vue-masked-input";
 export default {
-name: "Register_form.vue",
-  components: {Exist_account_button, FormsButton, MaskedInput},
+name: "RegisterForm.vue",
+  components: {ExistAccountButton, FormsButton, MaskedInput},
   props: {
     email: String,
     password: String,
