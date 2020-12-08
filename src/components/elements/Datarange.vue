@@ -1,30 +1,41 @@
 <template>
   <div class="datarange">
-    <div class="dropdown__date">
-      <div class="dropdown__date__title">прибытие</div>
-      <input class="dropdown__date__input arrived cov-datepicker"
-             placeholder="ДД.ММ.ГГГГ"
-             ref="arrived" readonly
-             @click="togglePicker()">
-      <img class="dropdown__date__expand" src="../../assets/expand_more.png" alt="">
+    <div v-if="this.$props.countInputs === 2" class="datarange__inputs__two">
+      <div class="dropdown__date">
+        <div class="dropdown__date__title">прибытие</div>
+        <input class="dropdown__date__input arrived cov-datepicker"
+               placeholder="ДД.ММ.ГГГГ"
+               ref="arrived" readonly
+               @click="togglePicker()">
+        <img class="dropdown__date__expand" src="../../assets/expand_more.png" alt="">
+      </div>
+      <div class="dropdown__date">
+        <div class="dropdown__date__title">выезд</div>
+        <input  class="dropdown__date__input departure"
+                placeholder="ДД.ММ.ГГГГ"
+                ref="departure" readonly
+                @click="togglePicker()">
+        <img class="dropdown__date__expand" src="../../assets/expand_more.png">
+      </div>
     </div>
-    <div class="dropdown__date">
-      <div class="dropdown__date__title">выезд</div>
-      <input  class="dropdown__date__input departure"
-              placeholder="ДД.ММ.ГГГГ"
-              ref="departure" readonly
-              @click="togglePicker()">
-      <img class="dropdown__date__expand" src="../../assets/expand_more.png">
+    <div v-if="this.$props.countInputs === 1" class="datarange__inputs__one">
+      <div class="dropdown__date">
+        <div class="dropdown__date__title">даты пребывания в отеле</div>
+        <input class="dropdown__date__input range cov-datepicker"
+               ref="range" readonly
+               @click="togglePicker()">
+        <img class="dropdown__date__expand" src="../../assets/expand_more.png" alt="">
+      </div>
     </div>
-      <div class="datarange__calendar" v-show="showCalendar">
-          <datepicker v-model="date" :inline = true
-          @selected="onSelect" :language="ru"
-          ref="programaticOpen" :mondayFirst = true
-        ></datepicker>
-        <div class="calendar__buttons">
-          <button class="cancel" @click="clearDates()">очистить</button>
-          <button class="apply" @click="applyDates()">применить</button>
-        </div>
+    <div class="datarange__calendar" v-show="showCalendar">
+        <datepicker v-model="date" :inline = true
+        @selected="onSelect" :language="ru"
+        ref="programaticOpen" :mondayFirst = true
+      ></datepicker>
+      <div class="calendar__buttons">
+        <button class="cancel" @click="clearDates()">очистить</button>
+        <button class="apply" @click="applyDates()">применить</button>
+      </div>
     </div>
 
   </div>
@@ -38,9 +49,12 @@ export default {
   components: {
     Datepicker
   },
+  props: {
+    countInputs: {type: Number, default: 1}
+  },
   data() {
     let date;
-    let showCalendar = true;
+    let showCalendar = false;
     return {
       date,
       ru: ru,
@@ -54,13 +68,22 @@ export default {
   },
   methods: {
     onSelect(date) {
+      this.setDates(date);
+      if (this.$props.countInputs === 2){
+        this.days.start ? this.$refs.arrived.value = this.convertDate(this.days.start) : null;
+        this.days.end ? this.$refs.departure.value = this.convertDate(this.days.end) : null;
+      } else {
+        this.days.start && this.days.end ?
+          this.$refs.range.value = this.convertDate(this.days.start, true) + ' - ' + this.convertDate(this.days.end, true) :
+          this.$refs.range.value = '';
+      }
+    },
+    setDates(date) {
       if (!this.days.start || new Date(this.days.start) > new Date(date))
       {
         this.$store.commit('setStartDate', date);
-        this.$refs.arrived.value = this.convertDate(this.days.start);
       } else {
         this.$store.commit('setEndDate', date);
-        this.$refs.departure.value = this.convertDate(this.days.end);
       }
     },
     togglePicker() {
@@ -74,17 +97,25 @@ export default {
       } else alert('Выберите две даты')
     },
     clearDates() {
-      this.$refs.arrived.value = this.$refs.departure.value = null;
+      this.$props.countInputs === 2 ?
+        this.$refs.arrived.value = this.$refs.departure.value = null :
+        this.$refs.range.value = null;
       this.$store.commit('clearDates');
       this.showCalendar = false;
     },
-    convertDate(date) {
-      return [date.getDate().toString().length === 1
+    convertDate(date, single) {
+      if (single) {
+        const dateRes = date.toLocaleString('ru', { day: 'numeric', month: 'short' });
+        return dateRes.substr(0, dateRes.length - 1);
+      } else {
+        return [date.getDate().toString().length === 1
           ? '0' + date.getDate()
           : date.getDate(),
-        date.getMonth() + 1,
-        date.getFullYear()]
-        .join('.');
+          date.getMonth() + 1,
+          date.getFullYear()]
+          .join('.');
+      }
+
     }
   },
   beforeDestroy() {
@@ -96,7 +127,6 @@ export default {
 <style lang="scss">
 @import "../style";
 @import "calendar";
-
 .dropdown__date {
   position: relative;
   font-family: 'Monserrat', sans-serif;
@@ -106,7 +136,7 @@ export default {
     font-weight: bold;
     font-size: 12px;
     line-height: 15px;
-    margin-bottom: 0.5vh;
+    margin-bottom: 4px;
 
     color: $darkShade100;
   }
@@ -117,11 +147,28 @@ export default {
     position: absolute;
     width: 12px;
     height: 8px;
-    bottom: 1.8vh;
-    right: 1.3vw;
+    bottom: 17px;
+    right: 16px;
     background-image: url("../../assets/expand_more.png");
   }
 }
 
+.datarange__inputs {
+  &__two {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__one {
+    .dropdown__date {
+      &__input {
+        width: 100%;
+      }
+      &__title {
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+}
 
 </style>
