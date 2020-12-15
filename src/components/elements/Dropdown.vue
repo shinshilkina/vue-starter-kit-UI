@@ -2,6 +2,7 @@
   <div class="dropdown">
     <div class="dropdown__header">
       <h3 v-if="dropdownType === 'guests'">гости</h3>
+      <h3 v-if="dropdownType === 'facilities'">удобства номера</h3>
       <input class="dropdown__input" :placeholder="this.textInputLocal" @click="showDropdown()" readonly>
       <img class="dropdown__show-more" src="../../assets/expand_more.png" @click="showDropdown()">
     </div>
@@ -87,15 +88,15 @@ name: "Dropdown.vue",
     position: relative;
   }
   &__input {
-    width: 320px;
-    margin-top: -5px;
+    width: 100%;
+    margin-top: -8px;
   }
   &__show-more {
     position: absolute;
     width: 12px;
     height: 8px;
     bottom: 1.8vh;
-    right: 1.3vw;
+    right: 15px;
     background-image: url("../../assets/expand_more.png");
   }
   &__body {

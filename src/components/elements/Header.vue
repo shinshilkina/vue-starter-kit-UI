@@ -5,7 +5,7 @@
       <img class="header__logo__text-img" src="../../assets/TOXIN.png"/>
     </div>
     <div class="header__navigation" v-for="item in this.navItems">
-      <router-link to=item.href>{{ item.title }}</router-link>
+      <router-link :to=item.href>{{ item.title }}</router-link>
     </div>
     <div class="header__buttons" v-if="authorization.name === null || authorization.lastName === null">
       <div><button class="header__button-login button-login">{{ buttonsText[0].title }}</button></div>
