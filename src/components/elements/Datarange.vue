@@ -2,93 +2,63 @@
   <div class="datarange">
     <div class="dropdown__date">
       <div class="dropdown__date__title">прибытие</div>
-      <input class="dropdown__date__input arrived cov-datepicker"
-             placeholder="ДД.ММ.ГГГГ"
-             ref="arrived" readonly
-             @click="togglePicker()">
-      <img class="dropdown__date__expand" src="../../assets/expand_more.png" alt="">
+      <input class="dropdown__date__input arrived" placeholder="ДД.ММ.ГГГГ" ref="arrived" readonly>
+      <img class="dropdown__date__expand" src="../../assets/expand_more.png">
     </div>
     <div class="dropdown__date">
       <div class="dropdown__date__title">выезд</div>
-      <input  class="dropdown__date__input departure"
-              placeholder="ДД.ММ.ГГГГ"
-              ref="departure" readonly
-              @click="togglePicker()">
+      <input  class="dropdown__date__input departure" placeholder="ДД.ММ.ГГГГ" ref="departure" readonly>
       <img class="dropdown__date__expand" src="../../assets/expand_more.png">
     </div>
-      <div class="datarange__calendar" v-show="showCalendar">
-          <datepicker v-model="date" :inline = true
-          @selected="onSelect" :language="ru"
-          ref="programaticOpen" :mondayFirst = true
-        ></datepicker>
-        <div class="calendar__buttons">
-          <button class="cancel" @click="clearDates()">очистить</button>
-          <button class="apply" @click="applyDates()">применить</button>
-        </div>
-    </div>
-
   </div>
 </template>
-<script>
-import Datepicker from 'vuejs-datepicker';
-import {ru} from 'vuejs-datepicker/dist/locale';
 
+<script>
+import Lightpick from 'lightpick';
 export default {
   name: "Datarange.vue",
-  components: {
-    Datepicker
-  },
   data() {
-    let date;
-    let showCalendar = true;
+    let countOfDays = 0;
+    let picker;
     return {
-      date,
-      ru: ru,
-      showCalendar
-    }
+      picker, countOfDays
+    };
   },
-  computed: {
-    days() {
-      return this.$store.getters['dates']
-    }
-  },
-  methods: {
-    onSelect(date) {
-      if (!this.days.start || new Date(this.days.start) > new Date(date))
-      {
-        this.$store.commit('setStartDate', date);
-        this.$refs.arrived.value = this.convertDate(this.days.start);
-      } else {
-        this.$store.commit('setEndDate', date);
-        this.$refs.departure.value = this.convertDate(this.days.end);
-      }
-    },
-    togglePicker() {
-      this.showCalendar ?
-        this.showCalendar = false:
-        this.showCalendar = true;
-    },
-    applyDates() {
-      if (this.days.start && this.days.end) {
-        this.$store.commit( 'setIntervalDate',new Date(this.days.end - this.days.start).getDate() - 1);
-      } else alert('Выберите две даты')
-    },
-    clearDates() {
-      this.$refs.arrived.value = this.$refs.departure.value = null;
-      this.$store.commit('clearDates');
-      this.showCalendar = false;
-    },
-    convertDate(date) {
-      return [date.getDate().toString().length === 1
-          ? '0' + date.getDate()
-          : date.getDate(),
-        date.getMonth() + 1,
-        date.getFullYear()]
-        .join('.');
-    }
+  mounted() {
+    this.picker = new Lightpick({
+      field: this.$refs.arrived,
+      secondField: this.$refs.departure,
+      singleDate: false,
+      lang: 'ru',
+      format: 'DD.MM.YYYY',
+      locale: {
+        buttons: {
+          reset: 'очистить',
+          apply: 'применить'
+        },
+        tooltip: {
+          one: 'день',
+          few: 'дня',
+          many: 'дней',
+        },
+        pluralize: function(i, locale) {
+          if ('one' in locale && i % 10 === 1 && !(i % 100 === 11)) return locale.one;
+          if ('few' in locale && i % 10 === Math.floor(i % 10) && i % 10 >= 2 && i % 10 <= 4 && !(i % 100 >= 12 && i % 100 <= 14)) return locale.few;
+          if ('many' in locale && (i % 10 === 0 || i % 10 === Math.floor(i % 10) && i % 10 >= 5 && i % 10 <= 9 || i % 100 === Math.floor(i % 100) && i % 100 >= 11 && i % 100 <= 14)) return locale.many;
+          if ('other' in locale) return locale.other;
+
+          return '';
+        }
+      },
+      onSelect: function(start, end) {
+        (start && end) ? this.countOfDays =  Math.round((end - start)/(1000*60*60*24)) + 1: null;
+        console.log(typeof this.countDays);
+      },
+      footer: true
+    });
   },
   beforeDestroy() {
-
+    this.picker.destroy();
   }
 }
 </script>
@@ -122,6 +92,4 @@ export default {
     background-image: url("../../assets/expand_more.png");
   }
 }
-
-
 </style>

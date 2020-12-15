@@ -8,8 +8,8 @@
       <router-link to=item.href>{{ item.title }}</router-link>
     </div>
     <div class="header__buttons" v-if="authorization.name === null || authorization.lastName === null">
-      <div><button class="header__button-login button-login">{{ buttonsText[0].title }}</button></div>
-      <button class="header__button-register button-register">{{ buttonsText[1].title }}</button>
+      <div><h3 class="header__button-login button-login">login</h3></div>
+      <h3 class="header__button-register button-register">register</h3>
     </div>
     <span class="header__profile" v-if="authorization.name !== null || authorization.lastName !== null">
       {{ authorization.name }} {{authorization.lastName }}
@@ -18,17 +18,21 @@
 </template>
 
 <script>
-import data from "../../data/data.ru.json"
 export default {
   name: "Header.vue",
-  components: {data},
   data() {
     return {
-      navItems: data.header.items,
-      buttonsText : data.header.buttons,
+      navItems: [
+        {title: "Home", href: "#"},
+        {title: "About Us", href: "#"},
+        {title: "Services", href: "#"},
+        {title: "Careers", href: "#"},
+        {title: "News", href: "#"},
+        {title: "Documentation", href: "#"}
+      ],
       authorization: {
-        name : null,
-        lastName : null
+        name : "Cosmin",
+        lastName : "Negoita"
       }
     }
   }
@@ -43,7 +47,7 @@ export default {
   flex-wrap: wrap;
 
   align-items: center;
-  padding: 0.6vh 9vw 1.4vh 9vw;
+  padding: 0.3vh 9vw;
 
   background-color: #FFFF;
   box-shadow: 0 1rem 2rem rgba(31, 32, 65, 0.05);
@@ -55,30 +59,15 @@ export default {
     }
   }
   &__buttons {
-    min-width: 13.8vw;
+    width: 13.8vw;
     display: flex;
     justify-content: space-between;
-  }
-  .button-login {
-    height: 3.4vh;
-    position: relative;
-    padding: 0 1.3vw;
-    border-radius: 22px;
-    background-color: #FFFFFF;
-    color: $purple;
-    border: 2px solid #8BA4F9;
-    letter-spacing: 0.05em;
+    align-items: center;
   }
 
   &__button-register {
-    height: 3.4vh;
+    height: 3.2vh;
     padding: 0 1.4vw;
-    margin-left: 1.2vw;
-
-    border: none;
-    border-radius: 22px;
-    letter-spacing: 0.05em;
-
     background-image: $primaryGradient;
     color: #FFFF;
   }
