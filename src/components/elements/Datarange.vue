@@ -7,7 +7,7 @@
                placeholder="ДД.ММ.ГГГГ"
                ref="arrived" readonly
                @click="togglePicker()">
-        <img class="dropdown__date__expand" src="../../assets/expand_more.png" alt="">
+        <img class="dropdown__date__expand" src="../../assets/explandMore.png" alt="">
       </div>
       <div class="dropdown__date">
         <div class="dropdown__date__title">выезд</div>
@@ -15,7 +15,7 @@
                 placeholder="ДД.ММ.ГГГГ"
                 ref="departure" readonly
                 @click="togglePicker()">
-        <img class="dropdown__date__expand" src="../../assets/expand_more.png">
+        <img class="dropdown__date__expand" src="../../assets/explandMore.png">
       </div>
     </div>
     <div v-if="this.$props.countInputs === 1" class="datarange__inputs__one">
@@ -24,7 +24,7 @@
         <input class="dropdown__date__input range cov-datepicker"
                ref="range" readonly
                @click="togglePicker()">
-        <img class="dropdown__date__expand" src="../../assets/expand_more.png" alt="">
+        <img class="dropdown__date__expand" src="../../assets/explandMore.png" alt="">
       </div>
     </div>
     <div class="datarange__calendar" v-show="showCalendar">
@@ -45,83 +45,83 @@ import Datepicker from 'vuejs-datepicker';
 import {ru} from 'vuejs-datepicker/dist/locale';
 
 export default {
-  name: "Datarange.vue",
-  components: {
-    Datepicker
-  },
-  props: {
-    countInputs: {type: Number, default: 1}
-  },
-  data() {
-    let date;
-    let showCalendar = false;
-    return {
-      date,
-      ru: ru,
-      showCalendar
-    }
-  },
-  computed: {
-    days() {
-      return this.$store.getters['dates']
-    }
-  },
-  methods: {
-    onSelect(date) {
-      this.setDates(date);
-      if (this.$props.countInputs === 2){
-        this.days.start ? this.$refs.arrived.value = this.convertDate(this.days.start) : null;
-        this.days.end ? this.$refs.departure.value = this.convertDate(this.days.end) : null;
-      } else {
-        this.days.start && this.days.end ?
-          this.$refs.range.value = this.convertDate(this.days.start, true) + ' - ' + this.convertDate(this.days.end, true) :
-          this.$refs.range.value = '';
-      }
+    name: 'Datarange.vue',
+    components: {
+        Datepicker
     },
-    setDates(date) {
-      if (!this.days.start || new Date(this.days.start) > new Date(date))
-      {
-        this.$store.commit('setStartDate', date);
-      } else {
-        this.$store.commit('setEndDate', date);
-      }
+    props: {
+        countInputs: {type: Number, default: 1}
     },
-    togglePicker() {
-      this.showCalendar ?
-        this.showCalendar = false:
-        this.showCalendar = true;
+    data() {
+        let date;
+        const showCalendar = false;
+        return {
+            date,
+            ru: ru,
+            showCalendar
+        };
     },
-    applyDates() {
-      if (this.days.start && this.days.end) {
-        this.$store.commit( 'setIntervalDate',new Date(this.days.end - this.days.start).getDate() - 1);
-      } else alert('Выберите две даты')
+    computed: {
+        days() {
+            return this.$store.getters['dates'];
+        }
     },
-    clearDates() {
-      this.$props.countInputs === 2 ?
-        this.$refs.arrived.value = this.$refs.departure.value = null :
-        this.$refs.range.value = null;
-      this.$store.commit('clearDates');
-      this.showCalendar = false;
+    methods: {
+        onSelect(date) {
+            this.setDates(date);
+            if (this.$props.countInputs === 2){
+                this.days.start ? this.$refs.arrived.value = this.convertDate(this.days.start) : null;
+                this.days.end ? this.$refs.departure.value = this.convertDate(this.days.end) : null;
+            } else {
+                this.days.start && this.days.end ?
+                    this.$refs.range.value = this.convertDate(this.days.start, true) + ' - ' + this.convertDate(this.days.end, true) :
+                    this.$refs.range.value = '';
+            }
+        },
+        setDates(date) {
+            if (!this.days.start || new Date(this.days.start) > new Date(date))
+            {
+                this.$store.commit('setStartDate', date);
+            } else {
+                this.$store.commit('setEndDate', date);
+            }
+        },
+        togglePicker() {
+            this.showCalendar ?
+                this.showCalendar = false:
+                this.showCalendar = true;
+        },
+        applyDates() {
+            if (this.days.start && this.days.end) {
+                this.$store.commit('setIntervalDate',new Date(this.days.end - this.days.start).getDate() - 1);
+            } else alert('Выберите две даты');
+        },
+        clearDates() {
+            this.$props.countInputs === 2 ?
+                this.$refs.arrived.value = this.$refs.departure.value = null :
+                this.$refs.range.value = null;
+            this.$store.commit('clearDates');
+            this.showCalendar = false;
+        },
+        convertDate(date, single) {
+            if (single) {
+                const dateRes = date.toLocaleString('ru', { day: 'numeric', month: 'short' });
+                return dateRes.substr(0, dateRes.length - 1);
+            } else {
+                return [date.getDate().toString().length === 1
+                    ? '0' + date.getDate()
+                    : date.getDate(),
+                date.getMonth() + 1,
+                date.getFullYear()]
+                    .join('.');
+            }
+
+        }
     },
-    convertDate(date, single) {
-      if (single) {
-        const dateRes = date.toLocaleString('ru', { day: 'numeric', month: 'short' });
-        return dateRes.substr(0, dateRes.length - 1);
-      } else {
-        return [date.getDate().toString().length === 1
-          ? '0' + date.getDate()
-          : date.getDate(),
-          date.getMonth() + 1,
-          date.getFullYear()]
-          .join('.');
-      }
+    beforeDestroy() {
 
     }
-  },
-  beforeDestroy() {
-
-  }
-}
+};
 </script>
 
 <style lang="scss">
@@ -149,7 +149,7 @@ export default {
     height: 8px;
     bottom: 17px;
     right: 16px;
-    background-image: url("../../assets/expand_more.png");
+    background-image: url("../../assets/explandMore.png");
   }
 }
 

@@ -17,18 +17,18 @@
 import VueSimpleRangeSlider from 'vue-simple-range-slider';
 
 export default {
-  name: "RangeSlider.vue",
-  components: {VueSimpleRangeSlider},
-  props: {
-    currency: {type: String, default: '₽'}
-  },
-  data() {
-    return {
-      range: [20, 1000],
-      number: 100
+    name: 'RangeSlider.vue',
+    components: {VueSimpleRangeSlider},
+    props: {
+        currency: {type: String, default: '₽'}
+    },
+    data() {
+        return {
+            range: [20, 1000],
+            number: 100
+        };
     }
-  }
-}
+};
 </script>
 
 <style lang="scss">

@@ -2,14 +2,14 @@
   <div>
     <div class="checkbox" v-if="list">
       <h3 class="checkbox__title">{{ this.title }}</h3>
-      <div class="checkbox__item" v-for="item in this.items">
+      <div class="checkbox__item" v-for="item in this.items" :key="item.id">
         <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
         <label class="checkbox__label" v-bind:for="item.id" >{{item.text }}</label>
       </div>
     </div>
     <div class="rich checkbox" v-if="rich">
       <h3 class="checkbox__title">{{ this.title }}</h3>
-      <div class="checkbox__item" v-for="item in this.items">
+      <div class="checkbox__item" v-for="item in this.items" :key="item.id">
         <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
         <label class="checkbox__label" v-bind:for="item.id" >
           {{item.title }}
@@ -19,37 +19,39 @@
     </div>
     <div class="expandable checkbox" v-if="expandable">
       <h3 class="checkbox__title"  @click="showDropdown()">{{ this.title }}</h3>
-      <img  class="expandMore"/>
-      <div class="checkbox__item" v-for="item in this.items" v-if="showCheckbox">
-        <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
-        <label class="checkbox__label" v-bind:for="item.id">{{ item.text }}</label>
+      <img class="checkbox__icon icon__expand" src="src/assets/explandMore.png"/>
+      <div v-if="showCheckbox">
+        <div class="checkbox__item" v-for="item in this.items" :key="item.id">
+          <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
+          <label class="checkbox__label" v-bind:for="item.id">{{ item.text }}</label>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import expandMore from '../../assets/explandMore.svg';
 export default {
-name: "checkboxList.vue",
-  components: { expandMore },
-  props: {
-    title: {type: String, default: 'expandable checkbox list'},
-    rich: {type: Boolean, default: false},
-    expandable: {type: Boolean, default: false},
-    list: {type: Boolean, default: false},
-    items: {type: Array, default: [{text: 'text', id: 'id', title: 'title'}]}
-  },
-  data() {
-    let showCheckbox = false;
-    return { showCheckbox };
-  },
-  methods: {
-    showDropdown() {
-      this.showCheckbox === false ? this.showCheckbox = true : this.showCheckbox = false;
+    name: 'checkboxList.vue',
+    components: { },
+    props: {
+        title: {type: String, default: 'expandable checkbox list'},
+        rich: {type: Boolean, default: false},
+        expandable: {type: Boolean, default: false},
+        list: {type: Boolean, default: false},
+        // eslint-disable-next-line vue/require-valid-default-prop
+        items: {type: Array, default: [{text: 'text', id: 'id', title: 'title'}]}
+    },
+    data() {
+        const showCheckbox = false;
+        return { showCheckbox };
+    },
+    methods: {
+        showDropdown() {
+            this.showCheckbox === false ? this.showCheckbox = true : this.showCheckbox = false;
+        }
     }
-  }
-}
+};
 </script>
 
 <style lang="scss">
@@ -105,6 +107,19 @@ name: "checkboxList.vue",
   }
   &__input:checked ~ &__label:before {
     border-color: $purple;
+  }
+}
+.expandable {
+  position: relative;
+  .checkbox__icon, .icon__expand {
+    position: absolute;
+    top: 2px;
+    right: 15px;
+    width: 12px;
+    height: 8px;
+  }
+  .checkbox__title {
+    width: 100%;
   }
 }
 .rich {
