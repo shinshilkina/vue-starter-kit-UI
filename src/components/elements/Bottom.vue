@@ -1,13 +1,13 @@
 <template>
   <div class="bottom-menu">
     <div class="bottom-menu__nav" :docs=dataText>
-      <div class="bottom-menu__block" v-for="elem in dataText">
+      <div class="bottom-menu__block" v-for="elem in dataText" :key="elem.id">
         <div class="bottom-menu__logo" v-if="elem.id==='title'">
           <img class="bottom-menu__logo__img" src="../../assets/logo.png"/>
           <img class="bottom-menu__logo__text-img" src="../../assets/TOXIN.png"/>
         </div>
         <h3 class="bottom-menu__title" v-if="elem.title">{{ elem.title }}</h3>
-        <span class="bottom-menu__element" v-for="item in elem.elements">
+        <span class="bottom-menu__element" v-for="item in elem.elements" :key="item.id">
           {{ item.element }}
         </span>
       </div>
@@ -26,16 +26,16 @@
 </template>
 
 <script>
-import dataText from "../../assets/data.json";
+import dataText from '../../assets/data.json';
 export default {
-  name: "Bottom.vue",
-  props: ['docs'],
-  data() {
-    return {
-      dataText: dataText.bottomData
+    name: 'Bottom.vue',
+    props: ['docs'],
+    data() {
+        return {
+            dataText: dataText.bottomData
+        };
     }
-  }
-}
+};
 
 
 </script>

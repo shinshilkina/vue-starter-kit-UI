@@ -1,8 +1,12 @@
 <template>
   <div>
     <Header />
-    <SearchForm />
-    <Bottom />
+    <main>
+      <SearchForm />
+    </main>
+    <bottom>
+      <Bottom />
+    </bottom>
   </div>
 </template>
 
@@ -21,6 +25,13 @@ name: "Landing.vue",
 
 .header {
   margin-top: 10px;
+}
+main {
+  height: 75.2vh;
+  padding: 7vh 0 0 9vw;
+  background-image: url("/src/assets/landing3.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 </style>

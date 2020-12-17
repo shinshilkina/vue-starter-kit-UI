@@ -15,7 +15,7 @@ h3, button, .register__label {
   @include MonserratH3();
 }
 
-span, router-link, input {
+span, router-link, input, label {
   @include MonserratSpan();
 }
 
@@ -75,3 +75,4 @@ input {
   color: $purple;
   border: 2px solid #8BA4F9;
 }
+

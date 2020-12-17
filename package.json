@@ -7,11 +7,13 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "eslint": "eslint  --fix"
   },
   "dependencies": {
     "@mathieustan/vue-datepicker": "^0.2.11",
     "@northwalker/vue-hotel-datepicker": "^2.0.7",
+    "eslint-friendly-formatter": "^4.0.1",
     "jquery": "^3.5.1",
     "lightpick": "^1.6.2",
     "moment": "^2.29.1",
@@ -22,6 +24,7 @@
     "vue-carousel": "^0.18.0",
     "vue-masked-input": "^0.5.2",
     "vue-router": "^3.4.7",
+    "vue-simple-range-slider": "^0.1.10",
     "vuejs-datepicker": "^1.6.2",
     "vuex": "^3.6.0"
   },
@@ -32,11 +35,17 @@
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-vue": "^7.3.0",
     "file-loader": "^1.1.4",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",

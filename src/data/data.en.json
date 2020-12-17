@@ -16,41 +16,41 @@
   "bottom": [
     { "id": "title",
       "elements":
-      [{"element": "Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam eget nullam pellentesque aliquam curabitur cociis."}]
+      [{"element": "Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam eget nullam pellentesque aliquam curabitur cociis.", "id": "subscription"}]
     },
     { "id": "navigation",
       "title": "Navigation",
       "elements": [
-        {"element": "About Us"},
-        {"element": "News"},
-        {"element": "Support"},
-        {"element": "Products"}
+        {"element": "About Us", "id": "about"},
+        {"element": "News", "id": "news"},
+        {"element": "Support", "id": "support"},
+        {"element": "Products", "id": "products"}
       ]
     },
     {
       "id": "about_us",
       "title": "ABOUT US",
       "elements" :[
-        {"element": "Who we are"},
-        {"element": "Our team"},
-        {"element": "Careers"},
-        {"element": "Investors"}
+        {"element": "Who we are", "id": "about"},
+        {"element": "Our team", "id": "team"},
+        {"element": "Careers", "id": "vacancy"},
+        {"element": "Investors", "id": "investors"}
       ]
     },
     {
       "id": "support",
       "title": "Support",
       "elements": [
-        {"element": "Documentation"},
-        {"element": "Community"},
-        {"element": "Get in Touch"}
+        {"element": "Documentation", "id": "documentation"},
+        {"element": "Community", "id": "community"},
+        {"element": "Get in Touch", "id": "social"}
       ]
     },
     {
       "id":"subscribe",
       "title": "Subscribe to our newsletter",
       "elements": [
-        {"element": "Receive our latest news and promotions in your inbox!"}
+        {"element": "Receive our latest news and promotions in your inbox!", "id": "subscription"}
       ]
     }
   ],

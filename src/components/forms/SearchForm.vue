@@ -1,7 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html">
   <div class="search-form">
     <h1>Найдём номера под <br> ваши пожелания</h1>
-    <Datarange />
+    <Datarange :count-inputs="2"/>
     <Dropdown :show = false textInput = 'Сколько гостей'
       dropdownType = 'guests'
               :lines = "[{ text: 'взрослые', count: 0}, { text: 'дети', count: 0},
@@ -29,9 +29,6 @@ export default {
 
   padding: 22px 29px;
   .datarange {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     margin-top: 2.3vh;
   }
   .dropdown {

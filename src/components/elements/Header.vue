@@ -4,8 +4,8 @@
       <img class="header__logo__img" src="../../assets/logo.png"/>
       <img class="header__logo__text-img" src="../../assets/TOXIN.png"/>
     </div>
-    <div class="header__navigation" v-for="item in this.navItems">
-      <router-link to=item.href>{{ item.title }}</router-link>
+    <div class="header__navigation" v-for="item in this.navItems" :key="item.id">
+      <router-link :to=item.href>{{ item.title }}</router-link>
     </div>
     <div class="header__buttons" v-if="authorization.name === null || authorization.lastName === null">
       <div><button class="header__button-login button-login">{{ buttonsText[0].title }}</button></div>
@@ -18,21 +18,22 @@
 </template>
 
 <script>
-import data from "../../data/data.ru.json"
+import data from '../../data/data.ru.json';
 export default {
-  name: "Header.vue",
-  components: {data},
-  data() {
-    return {
-      navItems: data.header.items,
-      buttonsText : data.header.buttons,
-      authorization: {
-        name : null,
-        lastName : null
-      }
+    name: 'Header.vue',
+    data() {
+        const navItems = data.header.items;
+        const buttonsText = data.header.buttons;
+        return {
+            navItems,
+            buttonsText,
+            authorization: {
+                name : null,
+                lastName : null
+            }
+        };
     }
-  }
-}
+};
 </script>
 
 <style lang="scss">
