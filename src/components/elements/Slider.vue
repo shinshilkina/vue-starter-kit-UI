@@ -61,7 +61,7 @@ name: "Slider.vue",
   width: 10px!important;
   height: 10px !important;
 
-  background-image: url("/src/assets/explandMore.svg") !important;
+  background-image: url("/src/assets/expand_more.svg") !important;
   background-repeat: no-repeat;
 }
 .VueCarousel-navigation-prev {

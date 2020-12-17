@@ -1,29 +1,20 @@
 <template>
-  <div>
-    <Header/>
-    <main>
-      <Filters/>
-    </main>
-    <bottom>
-      <Bottom/>
-    </bottom>
+  <div id="app">
+    <Landing />
   </div>
 </template>
 
 <script>
-
-import Vue from 'vue';
-import Header from './components/elements/Header';
-import Bottom from './components/elements/Bottom';
-import Filters from './components/elements/Filters';
-
+import Landing from "./components/pages/Landing";
 export default {
-    name: 'app',
-    components: {Header, Bottom, Filters},
-    data() {
-        return {};
+  name: 'app',
+  components: {Landing },
+  data () {
+    return {
+
     }
-};
+  }
+}
 </script>
 
 <style lang="scss">

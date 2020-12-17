@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "Colors_and_type",
+name: "Colors_and_type",
   data () {
     return {
       colors: [

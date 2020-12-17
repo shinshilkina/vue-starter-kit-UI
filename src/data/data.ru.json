@@ -15,41 +15,41 @@
   "bottom": [
     { "id": "title",
       "elements":
-      [{"element": "Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»", "id": "subscription"}]
+      [{"element": "Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»"}]
     },
     { "id": "navigation",
       "title": "Навигация",
       "elements": [
-        {"element": "О нас", "id": "about"},
-        {"element": "Новости", "id": "news"},
-        {"element": "Служба поддержки", "id": "support"},
-        {"element": "Услуги", "id": "services"}
+        {"element": "О нас"},
+        {"element": "Новости"},
+        {"element": "Служба поддержки"},
+        {"element": "Услуги"}
       ]
     },
     {
       "id": "about_us",
       "title": "о нас",
       "elements" :[
-        {"element": "О сервисе", "id": "aboutServices"},
-        {"element": "Наша команда", "id": "team"},
-        {"element": "Вакансии", "id": "vacancy"},
-        {"element": "Инвесторы", "id": "investors"}
+        {"element": "О сервисе"},
+        {"element": "Наша команда"},
+        {"element": "Вакансии"},
+        {"element": "Инвесторы"}
       ]
     },
     {
       "id": "support",
       "title": "Инвесторы",
       "elements": [
-        {"element": "Соглашения", "id": "agreements"},
-        {"element": "Сообщества", "id": "community"},
-        {"element": "Связь с нами", "id": "social"}
+        {"element": "Соглашения"},
+        {"element": "Сообщества"},
+        {"element": "Связь с нами"}
       ]
     },
     {
       "id":"subscribe",
       "title": "Подписка",
       "elements": [
-        {"element": "Получайте специальные предложения и новости сервиса", "id": "subscriptions"}
+        {"element": "Получайте специальные предложения и новости сервиса"}
       ]
     }
   ],
