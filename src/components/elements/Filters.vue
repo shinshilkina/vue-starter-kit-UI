@@ -1,23 +1,29 @@
 <template>
   <div class="filter">
-    <Datarange :count-inputs="1"/>
+    <Datarange @select="onSelectDates" :count-inputs="1"/>
     <Dropdown :show = false textInput = 'Сколько гостей'
               dropdownType = 'guests'
+              @select="onSelectGuests"
               :lines = "[{ text: 'взрослые', count: 0}, { text: 'дети', count: 0},
-              { text: 'младенцы', count: 0} ]"/>
-    <RangeSlider />
-    <CheckboxList :title="'checkbox buttons'" :list="true" :items="[{text: 'Можно курить', id: 'smoke'},
-      {text: 'Можно с питомцами', id: 'pets'}, {text: 'Можно пригласить гостей (до 10 человек)', id: 'guests'}]"/>
-    <CheckboxList :rich="true" :title="'доступность'"  :items="[ {title: 'Широкий коридор', text: 'Ширина коридоров в номере не менее 91 см.', id: 'corridor'},
+              { text: 'младенцы', count: 0} ] "/>
+    <RangeSlider @select="onSelectRange"/>
+    <CheckboxList :title="'checkbox buttons'" :list="true" @select="onSelectParamsList"
+                  :items="[{title: 'Можно курить', id: 'smoke'},
+      {title: 'Можно с питомцами', id: 'pets'}, {title: 'Можно пригласить гостей (до 10 человек)', id: 'guests'}]"/>
+    <CheckboxList :rich="true" :title="'доступность'"  @select="onSelectParamsRich"
+                  :items="[ {title: 'Широкий коридор', text: 'Ширина коридоров в номере не менее 91 см.', id: 'corridor'},
     {title: 'Помощник для инвалидов', text: 'На 1 этаже вас встретит специалист  и проводит до номера.', id: 'disabled'}]"/>
     <Dropdown :show = false textInput = 'Какие удобства'
               dropdownType = 'facilities'
+              @select="onSelectFacilities"
               :lines = "[{ text: 'спальни', count: 2}, { text: 'кровати', count: 2},
               { text: 'ванные комнаты', count: 0} ]"/>
-    <CheckboxList :expandable="true" :title="'дополнительные удобства'"  :items="[{text: 'Шампунь', id: 'shampoo'},
-      {text: 'Телевизор', id: 'tv'},{text: 'Шампунь', id: 'shampoo2'},{text: 'Телевизор', id: 'tv2'},
-      {text: 'Кроватка', id: 'cot'},{text: 'Стул для кормления', id: 'feedingChair'},
-      {text: 'Письменный стол', id: 'table'}, {text: 'Завтрак', id: 'breakfast'}]"/>
+    <CheckboxList :expandable="true" :title="'дополнительные удобства'"
+                  @select="onSelectParamsExpandable"
+                  :items="[{title: 'Шампунь', id: 'shampoo'},
+      {title: 'Телевизор', id: 'tv'},{title: 'Шампунь', id: 'shampoo2'},{title: 'Телевизор', id: 'tv2'},
+      {title: 'Кроватка', id: 'cot'},{title: 'Стул для кормления', id: 'feedingChair'},
+      {title: 'Письменный стол', id: 'table'}, {title: 'Завтрак', id: 'breakfast'}]"/>
   </div>
 </template>
 
@@ -29,7 +35,43 @@ import RangeSlider from './RangeSlider';
 export default {
     name: 'Filter.vue',
     components: {Datarange, Dropdown, CheckboxList,
-        RangeSlider}
+        RangeSlider},
+    data() {
+        return {
+            filterParams: {
+                'dropdownGuests': [],
+                'dates': {},
+                'facilities': [],
+                'range': [],
+                'paramsList': [],
+                'paramsRich': [],
+                'paramsExpandable': []
+            }
+        };
+    },
+    methods: {
+        onSelectGuests(value) {
+            this.filterParams.dropdownGuests = value;
+        },
+        onSelectDates(start, end) {
+            this.filterParams.dates = {'arrive': start, 'departure': end};
+        },
+        onSelectFacilities(value) {
+            this.filterParams.facilities = value;
+        },
+        onSelectRange(value) {
+            this.filterParams.range = value;
+        },
+        onSelectParamsList(value) {
+            this.filterParams.paramsList = value;
+        },
+        onSelectParamsRich(value) {
+            this.filterParams.paramsRich = value;
+        },
+        onSelectParamsExpandable(value) {
+            this.filterParams.paramsExpandable = value;
+        }
+    }
 };
 </script>
 

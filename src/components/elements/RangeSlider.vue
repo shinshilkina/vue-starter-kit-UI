@@ -27,6 +27,11 @@ export default {
             range: [20, 1000],
             number: 100
         };
+    },
+    watch: {
+        range(newValue) {
+            this.$emit('select', newValue);
+        }
     }
 };
 </script>

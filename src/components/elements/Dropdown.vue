@@ -3,8 +3,8 @@
     <div class="dropdown__header">
       <h3 v-if="dropdownType === 'guests'">гости</h3>
       <h3 v-if="dropdownType === 'facilities'">удобства номера</h3>
-      <input class="dropdown__input" :placeholder="this.textInputLocal" @click="showDropdown()" readonly>
-      <img class="dropdown__show-more" src="../../assets/explandMore.png" @click="showDropdown()">
+      <input class="dropdown__input" :placeholder="this.textInputLocal" @click="toggleDropdown()"  readonly>
+      <img class="dropdown__show-more" src="../../assets/explandMore.png" @click="toggleDropdown()">
     </div>
     <div class="dropdown__body" v-if="this.showLocal">
       <ul class="dropdown__elements">
@@ -44,7 +44,7 @@ export default {
         };
     },
     methods: {
-        showDropdown() {
+        toggleDropdown() {
             this.showLocal === false ? this.showLocal = true : this.showLocal = false;
         },
         changeCountMinus(line) {
@@ -69,6 +69,7 @@ export default {
                     this.textInputLocal = 'Сколько гостей';
             }
             this.showLocal = false;
+            this.$emit('select', this.lines);
         },
         clear() {
             this.linesLocal.map(line => {

@@ -3,14 +3,16 @@
     <div class="checkbox" v-if="list">
       <h3 class="checkbox__title">{{ this.title }}</h3>
       <div class="checkbox__item" v-for="item in this.items" :key="item.id">
-        <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
-        <label class="checkbox__label" v-bind:for="item.id" >{{item.text }}</label>
+        <input class="checkbox__input" type="checkbox"
+               v-model="checkedItems" :id="item.id" :value="item.title">
+        <label class="checkbox__label" v-bind:for="item.id" >{{item.title }}</label>
       </div>
     </div>
     <div class="rich checkbox" v-if="rich">
       <h3 class="checkbox__title">{{ this.title }}</h3>
       <div class="checkbox__item" v-for="item in this.items" :key="item.id">
-        <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
+        <input class="checkbox__input" type="checkbox"
+               v-model="checkedItems" :id="item.id" :value="item.title">
         <label class="checkbox__label" v-bind:for="item.id" >
           {{item.title }}
           <h3> {{ item.text }}</h3>
@@ -22,8 +24,9 @@
       <img class="checkbox__icon icon__expand" src="src/assets/explandMore.png"/>
       <div v-if="showCheckbox">
         <div class="checkbox__item" v-for="item in this.items" :key="item.id">
-          <input class="checkbox__input" type="checkbox" :id="item.id" :value="item.text">
-          <label class="checkbox__label" v-bind:for="item.id">{{ item.text }}</label>
+          <input class="checkbox__input" type="checkbox"
+                 v-model="checkedItems" :id="item.id" :value="item.title">
+          <label class="checkbox__label" v-bind:for="item.id">{{ item.title }}</label>
         </div>
       </div>
     </div>
@@ -33,7 +36,6 @@
 <script>
 export default {
     name: 'checkboxList.vue',
-    components: { },
     props: {
         title: {type: String, default: 'expandable checkbox list'},
         rich: {type: Boolean, default: false},
@@ -43,8 +45,14 @@ export default {
         items: {type: Array, default: [{text: 'text', id: 'id', title: 'title'}]}
     },
     data() {
+        const checkedItems = [];
         const showCheckbox = false;
-        return { showCheckbox };
+        return { showCheckbox, checkedItems };
+    },
+    watch: {
+        checkedItems(newValue) {
+            this.$emit('select', newValue);
+        }
     },
     methods: {
         showDropdown() {
@@ -135,9 +143,6 @@ export default {
       color: $darkShade50;
       letter-spacing: 0.05em;
     }
-  }
-  label.checkbox__label:before {
-    margin-top: -5px;
   }
   .checkbox__item {
     margin-bottom: -5px;

@@ -6,7 +6,8 @@
         <input class="dropdown__date__input arrived cov-datepicker"
                placeholder="ДД.ММ.ГГГГ"
                ref="arrived" readonly
-               @click="togglePicker()">
+               @click="togglePicker()"
+              @blur="togglePicker">
         <img class="dropdown__date__expand" src="../../assets/explandMore.png" alt="">
       </div>
       <div class="dropdown__date">
@@ -14,6 +15,7 @@
         <input  class="dropdown__date__input departure"
                 placeholder="ДД.ММ.ГГГГ"
                 ref="departure" readonly
+                @blur="togglePicker"
                 @click="togglePicker()">
         <img class="dropdown__date__expand" src="../../assets/explandMore.png">
       </div>
@@ -33,11 +35,10 @@
         ref="programaticOpen" :mondayFirst = true
       ></datepicker>
       <div class="calendar__buttons">
-        <button class="cancel" @click="clearDates()">очистить</button>
-        <button class="apply" @click="applyDates()">применить</button>
+        <button class="cancel" @click="clearDates">очистить</button>
+        <button class="apply" @click="applyDates">применить</button>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -93,7 +94,9 @@ export default {
         },
         applyDates() {
             if (this.days.start && this.days.end) {
+                this.$emit('select', this.days.start, this.days.end);
                 this.$store.commit('setIntervalDate',new Date(this.days.end - this.days.start).getDate() - 1);
+                this.togglePicker();
             } else alert('Выберите две даты');
         },
         clearDates() {
@@ -101,7 +104,7 @@ export default {
                 this.$refs.arrived.value = this.$refs.departure.value = null :
                 this.$refs.range.value = null;
             this.$store.commit('clearDates');
-            this.showCalendar = false;
+            this.togglePicker();
         },
         convertDate(date, single) {
             if (single) {
