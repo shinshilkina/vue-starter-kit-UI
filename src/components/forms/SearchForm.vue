@@ -1,4 +1,4 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
   <div class="search-form">
     <h1>Найдём номера под <br> ваши пожелания</h1>
     <Datarange :count-inputs="2"/>
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import Datarange from "../elements/Datarange";
-import Dropdown from "../elements/Dropdown";
-import FormsButton from "../elements/FormsButton";
+import Datarange from '../elements/Datarange';
+import Dropdown from '../elements/Dropdown';
+import FormsButton from '../elements/FormsButton';
 export default {
-  name: "Search_form",
-  components: {Dropdown, Datarange, FormsButton}
-}
+    name: 'Search_form',
+    components: {Dropdown, Datarange, FormsButton}
+};
 </script>
 
 <style lang="scss">

@@ -1,6 +1,6 @@
 <template>
   <div class="room-card-s">
-    <Slider />
+    <Slider :images="this.$props.images"/>
     <div class="room-card-s__title">
       <h3 class="room-card-s__title__symbol">№</h3>
       <h1 class="room-card-s__title__number">{{roomNumber}}</h1>
@@ -9,7 +9,7 @@
       <span class="room-card-s__title__time-interval"> в сутки</span>
     </div>
     <div class="room-card-s__rate">
-      <div class="room-card-s__rate__area" v-for="i in numbers">
+      <div class="room-card-s__rate__area" v-for="i in numbers" :key="i">
         <div v-if="i <= countStars" class="checked">
           <input type="radio" v-bind:id="roomNumber + 'star' + i" v-bind:value="i" checked>
           <label v-bind:for="roomNumber + 'star' + i" title="i"></label>
@@ -28,25 +28,26 @@
 </template>
 
 <script>
-import Slider from "./Slider";
+import Slider from './Slider';
 export default {
-name: "Room_cart_S.vue",
-  components: {Slider},
-  props: {
-    roomNumber: {type: Number, default: 840},
-    roomType: {type: String, default: ""},
-    roomCost: {type: Number, default: 9990},
-    currency: {type: String, default: "₽"},
-    countStars: {type: Number, default: 3},
-    countFeedbacks: {type: Number, default: 65}
-  },
-  data() {
-  let numbers = [1,2,3,4,5];
-    return {
-      numbers
+    name: 'RoomCartS.vue',
+    components: {Slider},
+    props: {
+        roomNumber: {type: Number, default: 840},
+        roomType: {type: String, default: ''},
+        roomCost: {type: Number, default: 9990},
+        currency: {type: String, default: '₽'},
+        countStars: {type: Number, default: 3},
+        countFeedbacks: {type: Number, default: 65},
+        images: Array
+    },
+    data() {
+        const numbers = [1,2,3,4,5];
+        return {
+            numbers
+        };
     }
-  }
-}
+};
 </script>
 
 <style lang="scss">
@@ -59,9 +60,11 @@ name: "Room_cart_S.vue",
   overflow:hidden;
 
   background-color: #ffff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
   &__title {
     display: flex;
-    margin: 24px 18px 13px 19px;
+    width: 100%;
+    margin: 0 18px 13px 19px;
     &__symbol, &__number, &__type, &__cost, &__time-interval {
       align-self: flex-end;
       margin: 0;
@@ -80,7 +83,7 @@ name: "Room_cart_S.vue",
     }
     &__cost {
       font-size: 15px;
-      margin: 0 6px 0 0;
+      margin: 0 6px 1px 0;
       color: $darkShade50;
     }
     &__time-interval {
@@ -92,6 +95,7 @@ name: "Room_cart_S.vue",
   }
   &__rate {
     display: flex;
+    width: 100%;
     margin: 0 19px 0 23px;
     padding-top: 11px;
     border-top: 1px solid rgba(31, 32, 65, 0.1);;

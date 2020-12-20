@@ -2,7 +2,7 @@
   <div>
     <Header/>
     <main>
-      <Filters/>
+      <SearchRoom />
     </main>
     <bottom>
       <Bottom/>
@@ -15,11 +15,11 @@
 import Vue from 'vue';
 import Header from './components/elements/Header';
 import Bottom from './components/elements/Bottom';
-import Filters from './components/elements/Filters';
+import SearchRoom from './components/pages/SearchRoom';
 
 export default {
     name: 'app',
-    components: {Header, Bottom, Filters},
+    components: {Header, Bottom, SearchRoom},
     data() {
         return {};
     }

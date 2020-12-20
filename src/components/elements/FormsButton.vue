@@ -7,16 +7,16 @@
 
 <script>
 export default {
-name: "FormsButton.vue",
-  props: {
-    textButton: {type: String, default: "Кнопка"}
-  },
-  data() {
-    return {
+    name: 'FormsButton.vue',
+    props: {
+        textButton: {type: String, default: 'Кнопка'}
+    },
+    data() {
+        return {
 
+        };
     }
-  }
-}
+};
 </script>
 
 <style lang="scss">

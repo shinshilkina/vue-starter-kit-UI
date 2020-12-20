@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import Header from "../elements/Header";
-import Bottom from "../elements/Bottom";
-import SearchForm from "../forms/SearchForm";
+import Header from '../elements/Header';
+import Bottom from '../elements/Bottom';
+import SearchForm from '../forms/SearchForm';
 export default {
-name: "Landing.vue",
-  components: {Header, Bottom, SearchForm}
-}
+    name: 'Landing.vue',
+    components: {Header, Bottom, SearchForm}
+};
 </script>
 
 <style lang="scss">

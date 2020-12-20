@@ -1,0 +1,116 @@
+{
+  "rooms": [
+    {
+      "number": 888,
+      "type": "люкс",
+      "cost": 9990,
+      "countFeedbacks": 145,
+      "countStars": 5,
+      "images": [
+        {"path": "src/assets/rooms/888.png", "key": 1},
+        {"path": "src/assets/rooms/888-2.png", "key": 2},
+        {"path": "src/assets/rooms/888-3.png", "key": 3}
+      ]
+    },
+    {
+      "number": 840,
+      "cost": 9990,
+      "countFeedbacks": 65,
+      "countStars": 4,
+      "images": [
+        {"path": "src/assets/rooms/840.png", "key": 1}
+      ]
+    },
+    {
+      "number": 980,
+      "type": "люкс",
+      "cost": 8500,
+      "countFeedbacks": 35,
+      "countStars": 3,
+      "images": [
+        {"path": "src/assets/rooms/980.png", "key": 1}
+      ]
+    },
+    {
+      "number": 856,
+      "cost": 7300,
+      "countFeedbacks": 19,
+      "countStars": 5,
+      "images": [
+        {"path": "src/assets/rooms/856.png", "key": 1}
+      ]
+    },
+    {
+      "number": 740,
+      "cost": 6000,
+      "countFeedbacks": 44,
+      "countStars": 4,
+      "images": [
+        {"path": "src/assets/rooms/740.png", "key": 1}
+      ]
+    },
+    {
+      "number": 982,
+      "cost": 5800,
+      "countFeedbacks": 56,
+      "countStars": 3,
+      "images": [
+        {"path": "src/assets/rooms/982.png", "key": 1}
+      ]
+    },
+    {
+      "number": 678,
+      "cost": 5500,
+      "countFeedbacks": 45,
+      "countStars": 5,
+      "images": [
+        {"path": "src/assets/rooms/678.png", "key": 1}
+      ]
+    },
+    {
+      "number": 450,
+      "cost": 5300,
+      "countFeedbacks": 39,
+      "countStars": 4,
+      "images": [
+        {"path": "src/assets/rooms/450.png", "key": 1}
+      ]
+    },
+    {
+      "number": 350,
+      "cost": 5000,
+      "countFeedbacks": 77,
+      "countStars": 3,
+      "images": [
+        {"path": "src/assets/rooms/350.png", "key": 1}
+      ]
+    },
+    {
+      "number": 666,
+      "cost": 5000,
+      "countFeedbacks": 25,
+      "countStars": 5,
+      "images": [
+        {"path": "src/assets/rooms/666.png", "key": 1}
+      ]
+    },
+    {
+      "number": 444,
+      "cost": 5000,
+      "countFeedbacks": 15,
+      "countStars": 3,
+      "images": [
+        {"path": "src/assets/rooms/444.png", "key": 1}
+      ]
+    },
+    {
+      "number": 352,
+      "cost": 5000,
+      "countFeedbacks": 55,
+      "countStars": 3,
+      "images": [
+        {"path": "src/assets/rooms/352.png", "key": 1}
+      ]
+    }
+  ]
+}

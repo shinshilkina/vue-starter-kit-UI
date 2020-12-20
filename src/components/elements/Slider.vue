@@ -2,8 +2,8 @@
   <div class="carousel">
     <carousel :perPage="1" :navigationEnabled="true" :navigationNextLabel=null
               :navigationPrevLabel=null >
-      <slide v-for="path in this.paths">
-        <img v-bind:src="path"/>
+      <slide v-for="image in this.$props.images" :key="image.key">
+        <img v-bind:src="image.path"/>
       </slide>
     </carousel>
   </div>
@@ -12,30 +12,31 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 export default {
-name: "Slider.vue",
-  components: {  Carousel,
-    Slide },
-  data() {
-    let paths = ['src/assets/rooms/image.png','src/assets/rooms/image.png','src/assets/rooms/image.png','src/assets/rooms/image.png']
-    return {
-      paths
+    name: 'Slider.vue',
+    components: { Carousel,
+        Slide },
+    props: {
+        images: {
+            type: Array,
+            // eslint-disable-next-line vue/require-valid-default-prop
+            default: [
+                {path: 'src/assets/rooms/image.png', key: 1},
+                {path: 'src/assets/rooms/image.png', key: 2},
+                {path: 'src/assets/rooms/image.png', key: 3},
+                {path: 'src/assets/rooms/image.png', key: 4}
+            ]
+        }
     }
-  },
-  mounted() {
-
-  }
-}
+};
 </script>
 
 <style lang="scss">
 @import "../style";
-.carousel {
-  width: 270px;
-  height: 151.38px;
-}
 /* rules for lib  */
 .VueCarousel {
   position: relative;
+  width: 270px;
+  height: 151.38px;
 }
 .VueCarousel-pagination {
   position: absolute;
@@ -73,5 +74,11 @@ name: "Slider.vue",
   right: 10px !important;
   transform: rotate(0deg) !important;
   top: 43% !important;
+}
+.VueCarousel-slide > img {
+  width: 270px;
+  height: 151.38px;
+  background-size: contain;
+  border-radius: 3px;
 }
 </style>

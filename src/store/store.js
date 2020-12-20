@@ -13,17 +13,17 @@ export default new Vuex.Store({
             },
             guests: []
         },
-        room: {
+        rooms: [{
             num: 840,
             type: null,
             cost: 9990
-        }
+        }]
     },
     mutations: {
         clearDates(state) {
             state.roomParams.selectedDays.countDays = 0;
             state.roomParams.selectedDays.start =
-        state.roomParams.selectedDays.end = null;
+            state.roomParams.selectedDays.end = null;
         },
         setStartDate(state, date) {
             state.roomParams.selectedDays.start = date;
@@ -37,7 +37,7 @@ export default new Vuex.Store({
 
     },
     getters: {
-        rooms: state => state.room,
+        rooms: state => state.rooms,
         dates: state => state.roomParams.selectedDays
     }
 });

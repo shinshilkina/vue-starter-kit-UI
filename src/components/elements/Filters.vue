@@ -79,12 +79,9 @@ export default {
 .filter {
   width: 18.3vw;
   min-width: 198.2px;
-  margin: 3.6vh 9vw;
+  margin: 3.6vh 1.2vw 3.6vh 9vw;
   .dropdown {
     margin-top: 22px;
-    &__body {
-      //width: 244px;
-    }
   }
   .range-slider {
     margin: 30px 0 25px;
