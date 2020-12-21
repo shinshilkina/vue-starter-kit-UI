@@ -1,0 +1,71 @@
+{
+  "header": {
+      "items": [
+        { "key": "home","title": "Home",  "href": "#home"},
+        { "key": "aboutUs", "title": "About Us", "href": "#aboutus"},
+        { "key": "services", "title": "Services", "href": "#services"},
+        { "key": "careers", "title": "Careers", "href": "#careers"},
+        { "key": "news", "title": "News", "href": "#news"},
+        { "key": "documentation", "title": "Documentation", "href": "#documentation"}
+      ],
+      "buttons": [
+        {"key": "login","title": "login"},
+        {"key": "register","title": "register"}
+      ]
+    },
+  "bottom": [
+    { "id": "title",
+      "elements":
+      [{"element": "Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam eget nullam pellentesque aliquam curabitur cociis.", "id": "subscription"}]
+    },
+    { "id": "navigation",
+      "title": "Navigation",
+      "elements": [
+        {"element": "About Us", "id": "about"},
+        {"element": "News", "id": "news"},
+        {"element": "Support", "id": "support"},
+        {"element": "Products", "id": "products"}
+      ]
+    },
+    {
+      "id": "about_us",
+      "title": "ABOUT US",
+      "elements" :[
+        {"element": "Who we are", "id": "about"},
+        {"element": "Our team", "id": "team"},
+        {"element": "Careers", "id": "vacancy"},
+        {"element": "Investors", "id": "investors"}
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Support",
+      "elements": [
+        {"element": "Documentation", "id": "documentation"},
+        {"element": "Community", "id": "community"},
+        {"element": "Get in Touch", "id": "social"}
+      ]
+    },
+    {
+      "id":"subscribe",
+      "title": "Subscribe to our newsletter",
+      "elements": [
+        {"element": "Receive our latest news and promotions in your inbox!", "id": "subscription"}
+      ]
+    }
+  ],
+  "forms": {
+  "search": {
+    "title": "We will find rooms for your needs",
+    "arrival": "arrival",
+    "departure": "departure",
+    "button": "pick a number"
+  }
+},
+  "elements": {
+    "dropdown": {
+      "title": "guests",
+      "placeholder": "How many guests"
+    }
+  }
+}
